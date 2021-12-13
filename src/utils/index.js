@@ -1,13 +1,16 @@
 const movieArr = [];
 
 class Movie {
-    constructor(title, actor = "Not specified") {
+    constructor(title, actors = "Not specified") {
         this.title = title;
-        this.actor = actor;
+        this.actors = actors;
     }
     add() {
         movieArr.push(this);
-        // console.log(movieArr);
+    }
+
+    log() {
+        console.log(movieArr);
     }
 }
 

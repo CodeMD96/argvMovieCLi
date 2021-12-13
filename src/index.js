@@ -1,20 +1,24 @@
+const yargs = require("yargs");
 const Movie = require("./utils").Movie;
-const movieArr = require("./utils").movieArr;
+const addActors = require("./utils/addActors.js");
+// below is from previous version, just showing how to export multiple things
+// const movieArr = require("./utils").movieArr;
+const args = yargs.argv;
+
 
 const app = () => {
-    const args = process.argv;
-    switch (args[2]) {
+    switch (args.command) {
         case "add":
-            for (let i=0; i<args.length; i++) {
-                if (args[i] === "add" && args[i+2] !== "add") {
-                    const newMovie = new Movie(args[i+1], args[i+2]);
-                    newMovie.add();
-                } else if (args[i] === "add" && args[i+2] === "add") {
-                    const newMovie = new Movie(args[i+1]);
-                    newMovie.add();
-                }
-            }
-            console.log(movieArr);
+            const newMovie = new Movie(args.title, addActors(args.actors));
+            newMovie.add();
+            newMovie.log();
+            break;
+        case "addMulti":
+            const newMovie1 = new Movie(args.title1, addActors(args.actors1));
+            newMovie1.add();
+            const newMovie2 = new Movie(args.title2, addActors(args.actors2));
+            newMovie2.add();
+            newMovie2.log();
             break;
         default:
             console.log("Incorrect command");
